@@ -5,11 +5,13 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.time.Duration;
 
 public class FullscreenCheck {
     WebDriver driver;
+    Logger logger = LoggerFactory.getLogger(FullscreenCheck.class);
     String testName = "Name";
     String testEmail = "test@email.test";
 
@@ -35,20 +37,24 @@ public class FullscreenCheck {
     @Test
     public void fullScreenTest() throws InterruptedException {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(5));
+        logger.info("Ввожу имя");
         WebElement formName = driver.findElement(
                 By.id("name"));
         formName.sendKeys(testName + Keys.ENTER);
         Assertions.assertEquals(testName, formName.getAttribute("value"));
 
+        logger.info("Ввожу email");
         WebElement formEmail = driver.findElement(
                 By.id("email"));
         formEmail.sendKeys(testEmail + Keys.ENTER);
         Assertions.assertEquals(testEmail, formEmail.getAttribute("value"));
 
+        logger.info("Нажал подтвердить");
         WebElement buttonSubmit = driver.findElement(
                 By.xpath("//button[@type='submit']"));
         buttonSubmit.click();
 
+        logger.info("Проверка сообщения");
         WebElement checkMessage = driver.findElement(
                 By.id ("messageBox"));
         String message = checkMessage.getText();
