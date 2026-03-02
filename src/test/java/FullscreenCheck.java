@@ -10,10 +10,10 @@ import org.slf4j.LoggerFactory;
 import java.time.Duration;
 
 public class FullscreenCheck {
-    WebDriver driver;
-    Logger logger = LoggerFactory.getLogger(FullscreenCheck.class);
-    String testName = "Name";
-    String testEmail = "test@email.test";
+    private WebDriver driver;
+    private Logger logger = LoggerFactory.getLogger(FullscreenCheck.class);
+    private String testName = "Name";
+    private String testEmail = "test@email.test";
 
     @BeforeAll
     public static void init(){
