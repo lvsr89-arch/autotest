@@ -17,6 +17,10 @@
         <seleniumVersion>4.14.0</seleniumVersion>
         <webdrivermanagerVersion>6.1.0</webdrivermanagerVersion>
         <junitVersion>5.11.0</junitVersion>
+        <slf4jVersion>2.0.9</slf4jVersion>
+        <logbackVersion>1.5.13</logbackVersion>
+        <surefireVersion>3.5.5</surefireVersion>
+
     </properties>
     <dependencies>
         <dependency>
@@ -38,12 +42,36 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>2.0.9</version>
+            <version>${slf4jVersion}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.5.13</version>
+            <version>${logbackVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>${surefireVersion}</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefireVersion}</version>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
