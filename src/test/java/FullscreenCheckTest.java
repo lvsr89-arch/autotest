@@ -1,41 +1,23 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.openqa.selenium.chrome.ChromeOptions;
+
 import java.time.Duration;
 
-public class FullscreenCheck {
-    private WebDriver driver;
-    private Logger logger = LoggerFactory.getLogger(FullscreenCheck.class);
-    private String testName = "Name";
-    private String testEmail = "test@email.test";
+public class FullscreenCheckTest extends AbsBaseTest{
 
-    @BeforeAll
-    public static void init(){
-        WebDriverManager.chromedriver().setup();
+    @Override
+    protected ChromeOptions getChromeOptions() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--fullscreen");
+        return options;
     }
 
-    @BeforeEach
-    public void beforeEach(){
-        driver = new ChromeDriver();
-        driver.get(System.getenv("URL"));
-        driver.manage().window().fullscreen();
-    }
-
-    @AfterEach
-    public void teardown(){
-       if(driver != null) {
-           driver.quit();
-       }
-    }
 
     @Test
-    public void fullScreenTest() throws InterruptedException {
+    public void fullScreenTest() {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(5));
         logger.info("Ввожу имя");
         WebElement formName = driver.findElement(
